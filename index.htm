@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html manifest="cache.manifest">
+	<head>
+		<meta charset="utf-8">
+		<title>Klokke</title>
+		<link rel="stylesheet" type="text/css" href="dark.css">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+		
+		<script>
+		
+			var days = new Array("Søndag", "Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lørdag");
+			var months = new Array("januar", "februar", "mars", "april", "mai", "juni", "juli", "august", "september", "oktober", "november", "desember");
+		
+			function startTime()
+			{
+    			var today = new Date();
+    			var hour = today.getHours();
+    			var min = today.getMinutes();
+    			var sec = today.getSeconds();
+    			var day = today.getDay();
+    			var date = today.getDate();
+    			var month = today.getMonth();
+    			var year = today.getFullYear();
+    			
+    			hour = checkTime(hour);
+    			min = checkTime(min);
+    			sec = checkTime(sec);
+//     			date = checkTime(date);
+    			
+    			document.getElementById('time').innerHTML = hour + ':' + min + ':' + sec;
+    			document.getElementById('date').innerHTML = days[day] + ' ' + date + '. ' + months[month] + ' ' + year;
+    			
+    			var a = setTimeout(function(){startTime()}, 500);
+			}
+			
+			function checkTime(t)
+			{
+    			if (t < 10) {t = "0" + t};
+    			return t;
+			}
+		</script>
+	</head>
+	<body onload="startTime()">
+		<div id="time"></div>
+		<div id="date"></div>
+	</body>
+</html>
